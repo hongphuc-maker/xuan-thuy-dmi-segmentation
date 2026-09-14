@@ -1,5 +1,5 @@
 schema_version: xtseg-publication-results-v1
-artifact_audit_date: 2026-09-14
+artifact_audit_date: 2026-09-15
 rules:
   missing_values: null
   independent_points_must_not_drive_selection: true
@@ -57,20 +57,36 @@ results:
         per_class_metrics: bc9cee14b801f5c9afc1f3f9c82a98df8cef01f3615e348076651b9a1a7db7e2
         confusion_long: e6af10d3119ffd847c808fabf74a26cc405c1aba3239b8358819880b0aef380c
   ce_to_dmi_lr1e_5_control:
-    execution_status: partial
-    planned_steps: 6240
-    latest_observed_step: 3432
-    spatial_validation_so_far:
+    execution_status: completed
+    spatial_validation:
+      primary_selected_by: fixed_train_panel_dmi_loss
+      primary_selected_step: 6084
+      primary_fixed_train_panel_dmi_loss: 39.01319718836613
+      oa_at_primary: 0.8117079571413032
+      macro_f1_11_at_primary: 0.4537736168094273
+      macro_iou_11_at_primary: 0.3530718876666723
+      validation_dmi_loss_at_primary: 60.10642653623647
       best_macro_f1_11: 0.4614223172320541
       best_macro_f1_step: 936
+      oa_at_best_macro_f1: 0.8133226367888611
+      macro_iou_11_at_best_macro_f1: 0.35697480559877254
       best_macro_iou_11: 0.35738349323483365
       best_macro_iou_step: 1872
-      minimum_validation_dmi_loss: 59.87409293230223
-      minimum_validation_dmi_step: 2340
-      minimum_fixed_train_panel_dmi_loss: 39.065419884809494
-      minimum_fixed_train_panel_dmi_step: 3276
-    independent_verified_points: null
-    publication_use: do_not_treat_as_final_or_use_for_primary_comparison
+      minimum_validation_dmi_loss: 59.85044271217786
+      minimum_validation_dmi_step: 4836
+    independent_verified_points:
+      input_points: 1037
+      evaluated_points: 1036
+      verified_classes_present: 7
+      oa: 0.9305019305019305
+      macro_f1_verified_classes: 0.9154192141504938
+      macro_recall_verified_classes: 0.907098193258386
+      predicted_classes_all_11: 9
+      map_sha256: 44c19fb6c4638313133c6e41632bb327d4e9209edb7a205823a0592c94cac836
+      evaluation_artifact_sha256:
+        point_predictions: 10c37d413d5187157b75c3c6e39b4e46eb761d3d5ab3c91b3c48b8b018948d67
+        per_class_metrics: 496fdcda51d36d20db40e9861fab238f9c97538ff04af0e43e75c716974c00e7
+        confusion_long: a33cf4d28e21590bf8908ec09b4a8e5c4882c53ff69bc7013950b773e4e8a337
   ce_to_dmi_lr1e_5_logit_closing:
     execution_status: completed
     spatial_validation:

@@ -32,10 +32,11 @@ experiments:
     experiment_id: pipeline_E2w_control_vertical_weighted_CE_best2652_to_DMI_lr1e-5
     method_hash: 813f6be070dc62163f8aa31f645ea78d71db675c1124d66a2ec86b1340916188
     role: matched_no_morphology_control
-    execution_status: partial_at_artifact_audit
+    execution_status: completed
     initialization_checkpoint_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
-    latest_observed_step: 3432
-    planned_steps: 6240
+    selected_step: 6084
+    selected_checkpoint_sha256: 6a684f35624d736038a69121cec7fb19e4dbe6be280e0f562bb07f63349e9670
+    exported_final_model_sha256: 1a9a8c8f7240903c80273b07d7457428b40d0d72e6c80744ad28196355f1a0fd
     execution_source_commit: 86104fd84ea98187535fc7a06da8e5fe366ff467
   - key: ce_to_dmi_lr1e_5_logit_closing
     config: configs/experiments/pipeline_e3m_vertical_weighted_ce_to_dmi_logit_additive_closing_lr1e-5.yaml

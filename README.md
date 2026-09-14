@@ -107,15 +107,17 @@ Artifact-audited independent-point results currently available are:
 | --- | ---: | ---: | --- |
 | Weighted CE | 0.920849 | 0.898755 | complete |
 | Weighted CE to DMI, LR `3e-7` | 0.925676 | 0.909443 | complete |
+| Matched no-morphology DMI control, LR `1e-5` | 0.930502 | 0.915419 | complete |
 | Weighted CE to DMI + logit closing, LR `1e-5` | 0.925676 | 0.909508 | complete |
-| Matched no-morphology DMI control, LR `1e-5` | — | — | partial at step 3,432/6,240 |
 
 These values cover 1,036 usable points from an input archive of 1,037 points;
-only 7 of the 11 classes are represented in verified ground truth. The tiny
-difference between the two completed DMI rows is descriptive, not evidence of a
-morphology effect, because their learning rates differ. See the
-[publication checklist](docs/PUBLICATION_CHECKLIST.md) for the matched-control
-requirement.
+only 7 of the 11 classes are represented in verified ground truth. The matched
+`1e-5` control now enables the intended one-factor-at-a-time comparison against
+the `1e-5` logit-closing branch. On the independent verified points, the control
+is numerically higher than the morphology branch, but these held-out points were
+not used for checkpoint selection or tuning. Morphology claims should therefore
+also consider the spatial-validation trajectory and direct matched map-structure
+evidence rather than treating this final point evaluation as a tuning signal.
 
 Citation metadata is in [`CITATION.cff`](CITATION.cff). Article title, author
 order, and DOI will be updated when the manuscript metadata is finalized.
