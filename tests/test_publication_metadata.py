@@ -36,12 +36,21 @@ def test_publication_manifest_matches_resolved_configs() -> None:
         assert bundle.experiment["experiment_id"] == experiment["experiment_id"]
         assert bundle.method_hash == experiment["method_hash"]
     assert set(keys) == set(results)
+
     control = next(
         item for item in manifest["experiments"] if item["key"] == "ce_to_dmi_lr1e_5_control"
     )
-    assert control["execution_status"] == "partial_at_artifact_audit"
-    assert results["ce_to_dmi_lr1e_5_control"]["execution_status"] == "partial"
-    assert results["ce_to_dmi_lr1e_5_control"]["independent_verified_points"] is None
+    control_results = results["ce_to_dmi_lr1e_5_control"]
+
+    assert control["execution_status"] == "completed"
+    assert control["selected_step"] == 6084
+    assert len(control["selected_checkpoint_sha256"]) == 64
+    assert len(control["exported_final_model_sha256"]) == 64
+    assert control_results["execution_status"] == "completed"
+    assert control_results["spatial_validation"]["primary_selected_step"] == 6084
+    assert control_results["independent_verified_points"] is not None
+    assert control_results["independent_verified_points"]["evaluated_points"] == 1036
+    assert len(control_results["independent_verified_points"]["map_sha256"]) == 64
 
 
 def test_dataset_contract_uses_relative_paths_and_checksums() -> None:
