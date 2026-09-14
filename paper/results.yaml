@@ -1,0 +1,108 @@
+schema_version: xtseg-publication-results-v1
+artifact_audit_date: 2026-09-14
+rules:
+  missing_values: null
+  independent_points_must_not_drive_selection: true
+  fixed_train_panel_dmi_is_validation_metric: false
+  fixed_train_panel_dmi_role: training_optimization_monitor
+results:
+  weighted_ce:
+    execution_status: completed
+    spatial_validation:
+      selected_by: validation_macro_f1_11
+      selected_step: 2652
+      oa_at_selected: 0.8023870064179267
+      macro_f1_11_at_selected: 0.4534251970122703
+      macro_iou_11_at_selected: 0.35113041004445245
+      predicted_classes_at_selected: 11
+      acceptance_pass: false
+    independent_verified_points:
+      input_points: 1037
+      evaluated_points: 1036
+      verified_classes_present: 7
+      oa: 0.9208494208494209
+      macro_f1_verified_classes: 0.898755143555266
+      macro_recall_verified_classes: 0.8887541989442423
+      predicted_classes_all_11: 9
+      map_sha256: 32bbd3da42664870a255ad625da8cd9105398128695b9736e1fffb48aec8a590
+      evaluation_artifact_sha256:
+        point_predictions: d3722073dd36ced1a880ff5914bf54e2b093d8cda872752aa66257a455869f30
+        per_class_metrics: c5cf6a7c8a33415e049ed124d48564f41c2f5617e2d255fb1059ad82a060055f
+        confusion_long: a1def9beac655d384ddda7e1e10e3c3706cb06c247d9908ee1e7905414ca8925
+  ce_to_dmi_lr3e_7:
+    execution_status: completed
+    spatial_validation:
+      primary_selected_by: fixed_train_panel_dmi_loss
+      primary_selected_step: 6084
+      primary_fixed_train_panel_dmi_loss: 39.267190016215686
+      oa_at_primary: 0.8115311922114652
+      macro_f1_11_at_primary: 0.4574566260885132
+      macro_iou_11_at_primary: 0.35444923681108265
+      best_macro_f1_11: 0.45848951192998116
+      best_macro_f1_step: 1872
+      macro_iou_11_at_best_macro_f1: 0.35598217155504375
+      validation_dmi_loss: null
+      validation_dmi_note: not_recorded_by_execution_revision
+    independent_verified_points:
+      input_points: 1037
+      evaluated_points: 1036
+      verified_classes_present: 7
+      oa: 0.9256756756756757
+      macro_f1_verified_classes: 0.9094430599514773
+      macro_recall_verified_classes: 0.9009544801736791
+      predicted_classes_all_11: 9
+      map_sha256: 6fbff94fee9cc7b5bf1edd17a3ee83b446bb27fb22f3bb1d231a4b11cd1f6b11
+      evaluation_artifact_sha256:
+        point_predictions: 62bc1f6a9e96d9478d82e6beb45a2d29d606309790ed3bd41bf6152434bceefe
+        per_class_metrics: bc9cee14b801f5c9afc1f3f9c82a98df8cef01f3615e348076651b9a1a7db7e2
+        confusion_long: e6af10d3119ffd847c808fabf74a26cc405c1aba3239b8358819880b0aef380c
+  ce_to_dmi_lr1e_5_control:
+    execution_status: partial
+    planned_steps: 6240
+    latest_observed_step: 3432
+    spatial_validation_so_far:
+      best_macro_f1_11: 0.4614223172320541
+      best_macro_f1_step: 936
+      best_macro_iou_11: 0.35738349323483365
+      best_macro_iou_step: 1872
+      minimum_validation_dmi_loss: 59.87409293230223
+      minimum_validation_dmi_step: 2340
+      minimum_fixed_train_panel_dmi_loss: 39.065419884809494
+      minimum_fixed_train_panel_dmi_step: 3276
+    independent_verified_points: null
+    publication_use: do_not_treat_as_final_or_use_for_primary_comparison
+  ce_to_dmi_lr1e_5_logit_closing:
+    execution_status: completed
+    spatial_validation:
+      primary_selected_by: fixed_train_panel_dmi_loss
+      primary_selected_step: 6084
+      primary_fixed_train_panel_dmi_loss: 39.01181790107267
+      oa_at_primary: 0.8136625693462417
+      macro_f1_11_at_primary: 0.45159156110870335
+      macro_iou_11_at_primary: 0.35182592731606066
+      validation_dmi_loss_at_primary: 60.298532448638476
+      best_macro_f1_11: 0.460269805152371
+      best_macro_f1_step: 1872
+      oa_at_best_macro_f1: 0.8147333569019907
+      macro_iou_11_at_best_macro_f1: 0.3573120957205732
+      minimum_validation_dmi_loss: 59.986483648505136
+      minimum_validation_dmi_step: 624
+    independent_verified_points:
+      input_points: 1037
+      evaluated_points: 1036
+      verified_classes_present: 7
+      oa: 0.9256756756756757
+      macro_f1_verified_classes: 0.9095081110880673
+      macro_recall_verified_classes: 0.900539482817688
+      predicted_classes_all_11: 9
+      map_sha256: 6d06ca5a5f06419b9936556a93d656cfa2cd037ba5ba74206e4813ab43a4b083
+      evaluation_artifact_sha256:
+        point_predictions: 3b3c223d49c55d20a8f2f5e60c4596091a62e37b6e6ea8393fe67187ea6360dd
+        per_class_metrics: 6c1b4b1178b59806d4fba0ff9c217f4991f34cafba929760b5aafe0adfb7b248
+        confusion_long: 9eda85bb842a2345697bebb36afef1ec30245779dda2b868cb77d7feee789b4d
+    descriptive_map_comparison_against_lr3e_7_no_morphology:
+      changed_pixel_fraction: 0.0168
+      total_components_relative_change: -0.260
+      singleton_components_relative_change: -0.544
+      boundary_pixels_relative_change: -0.079
+      interpretation: learning_rate_and_morphology_are_confounding_factors

@@ -1,0 +1,33 @@
+schema_version: xtseg-experiment-v1
+experiment_id: pipeline_E0w_vertical_weighted_CE
+seed: 20260910
+dataset: ../datasets/xuanthuy_may2026_labels_jan2026.yaml
+split: ../splits/pipeline_vertical_band_v1.yaml
+model: ../models/unet_bn64_v1.yaml
+phases:
+  - phase_id: weighted_ce
+    loss: ../losses/ce_mild_weighted_from_artifact_v1.yaml
+    initialization: seed
+    optimizer:
+      type: sgd
+      learning_rate: 1.0e-3
+      momentum: 0.9
+      weight_decay: 0.0
+    maximum_steps: 3120
+    validation_interval_steps: 156
+    monitor_interval_steps: 10
+selection:
+  checkpoint:
+    metric: validation_macro_f1_11
+    direction: max
+    min_delta: 0.001
+  stopping:
+    rule: patience
+    patience_evaluations: 6
+acceptance:
+  required_predicted_classes: 11
+  minimum_recall_by_code:
+    5: 0.05
+    6: 0.05
+    7: 0.05
+status: runnable_pipeline_example

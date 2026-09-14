@@ -1,0 +1,10 @@
+schema_version: xtseg-loss-v1
+loss_id: deterministic_masked_sqrt_weighted_ce_from_prepared_data_v1
+type: ce_weighted
+parameters:
+  ignore_index: 255
+  weighting:
+    method: sqrt_inverse_frequency
+    source: prepared_data_train_core
+    minimum: 0.5
+    maximum: 5.0

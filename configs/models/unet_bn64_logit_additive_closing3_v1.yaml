@@ -1,0 +1,13 @@
+schema_version: xtseg-model-v1
+model_id: unet_bn64_10band_11class_logit_additive_closing3_beta10_v1
+architecture: custom
+factory: xuanthuy_seg.models.logit_additive_closing:build_unet_with_logit_additive_closing
+parameters:
+  in_channels: 10
+  num_classes: 11
+  base_channels: 64
+  kernel_size: 3
+  beta: 10.0
+  padding_mode: replicate
+  se_initialization: zeros
+output: logits

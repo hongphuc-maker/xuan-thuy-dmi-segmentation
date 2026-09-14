@@ -1,0 +1,62 @@
+schema_version: xtseg-experiment-v1
+experiment_id: pipeline_E2w_control_vertical_weighted_CE_best2652_to_DMI_lr1e-5
+seed: 20260910
+dataset: ../datasets/xuanthuy_may2026_labels_jan2026.yaml
+split: ../splits/pipeline_vertical_band_v1.yaml
+model: ../models/unet_bn64_v1.yaml
+phases:
+  - phase_id: dmi_lr1e-5_from_weighted_ce_best2652
+    loss: ../losses/dmi_exact_v1.yaml
+    initialization:
+      type: checkpoint
+      artifact: E0w_vertical_seed20260910/training/FINAL_MODEL.pt
+      sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+    optimizer:
+      type: sgd
+      learning_rate: 1.0e-5
+      momentum: 0.0
+      weight_decay: 0.0
+    maximum_steps: 6240
+    validation_interval_steps: 156
+    monitor_interval_steps: 10
+selection:
+  checkpoint:
+    metric: fixed_train_panel_dmi_loss
+    direction: min
+    min_delta: 0.0
+  stopping:
+    rule: maximum_steps
+acceptance:
+  required_predicted_classes: null
+  minimum_recall_by_code: {}
+lineage:
+  pretrained_experiment_id: pipeline_E0w_vertical_weighted_CE
+  pretrained_method_hash: 6e0e849b7cb556dcbf2862790fb7d2336586faf105416536056148fcffcd8e21
+  pretrained_checkpoint_role: FINAL_MODEL_from_best_unrestricted_validation_macro_f1_11
+  pretrained_selected_step: 2652
+  pretrained_checkpoint_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+  matched_control_for: pipeline_E3m_vertical_weighted_CE_best2652_to_DMI_logit_additive_closing3_lr1e-5
+  controlled_factor: no_morphology
+budget:
+  frozen_patches: 4992
+  batch_size: 16
+  optimizer_steps_per_data_pass: 312
+  dmi_steps: 6240
+  dmi_data_passes: 20
+  validation_interval_steps: 156
+reporting:
+  primary_checkpoint: best_accepted_checkpoint.pt selected by fixed_train_panel_dmi_loss
+  auxiliary_checkpoints:
+    - best_validation_macro_f1_checkpoint.pt
+    - best_validation_macro_iou_checkpoint.pt
+  always_record:
+    - fixed_train_panel_dmi_loss
+    - validation_dmi_loss
+    - validation_macro_f1_11
+    - validation_macro_iou_11
+    - validation_oa
+    - predicted_classes
+    - per_class_recall
+  protocol_relation: Matched no-morphology control for the E3m logit additive closing pilot.
+  controlled_difference: Uses the canonical U-Net without a morphology layer; all locked training inputs and hyperparameters match E3m.
+status: runnable_from_locked_weighted_ce_checkpoint

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local data and generated runs are never source code
+/data/
+/input/
+/runs/
+/research_runs/
+/outputs/
+/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.tif
+*.tiff
+*.zip
+
+# Local configuration overrides
+.env
+configs/local/

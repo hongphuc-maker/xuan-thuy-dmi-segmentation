@@ -1,0 +1,22 @@
+schema_version: xtseg-split-v1
+split_id: pipeline_vertical_val1122_1389_guard48_v1
+strategy: vertical_band
+parameters:
+  validation_start: 1122
+  validation_stop: 1389
+  guard_px_each_side: 48
+patch_policy:
+  size: 224
+  minimum_train_fraction: 0.50
+  validation_stride: 112
+  inference_stride: 112
+sampling:
+  manifest_seed: 20260905
+  schedule_seed: 20260906
+  n_patches: 4992
+  batch_size: 16
+  rare_codes: [5, 6, 7]
+  rare_quota_each: 416
+  dmi_support_floor_px: 128
+audit:
+  require_zero_shared_input_pixels: true

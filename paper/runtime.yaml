@@ -1,0 +1,13 @@
+schema_version: xtseg-publication-runtime-v1
+artifact_audit_date: 2026-09-14
+common:
+  seed: 20260910
+  python: 3.13.15
+  numpy: 2.1.3
+  torch: 2.11.0+cu128
+  cuda: 12.8
+  gpu: Tesla T4
+  deterministic_warn_only: false
+notes:
+  - Colab base images and package wheels change over time; record the actual runtime for every reproduction.
+  - The public CI uses a CPU environment and validates behavior, not GPU throughput or bitwise cross-device identity.

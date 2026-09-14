@@ -1,0 +1,8 @@
+schema_version: xtseg-model-v1
+model_id: unet_bn64_10band_11class_v1
+architecture: unet_bn
+parameters:
+  in_channels: 10
+  num_classes: 11
+  base_channels: 64
+output: logits

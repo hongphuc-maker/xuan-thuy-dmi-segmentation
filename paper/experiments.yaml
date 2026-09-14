@@ -1,0 +1,50 @@
+schema_version: xtseg-publication-experiments-v1
+publication_scope: sentinel2_2026_weighted_ce_dmi_and_logit_closing
+source_release: v0.1.0
+dataset_contract: configs/datasets/xuanthuy_may2026_labels_jan2026.yaml
+split_contract: configs/splits/pipeline_vertical_band_v1.yaml
+experiments:
+  - key: weighted_ce
+    config: configs/experiments/pipeline_e0w_vertical.yaml
+    experiment_id: pipeline_E0w_vertical_weighted_CE
+    method_hash: 6e0e849b7cb556dcbf2862790fb7d2336586faf105416536056148fcffcd8e21
+    role: baseline
+    execution_status: completed
+    selected_checkpoint_role: best_unrestricted_validation_macro_f1_11
+    selected_step: 2652
+    selected_phase_checkpoint_sha256: 99d497ddfd7ce9ded4c127ca31d3e8049bd24fe80d34c1a653823dce8f30af53
+    exported_final_model_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+    acceptance_pass: false
+    execution_source_commit: 08c915d560834dc7bc9e49d118d02ef0b790aef3
+  - key: ce_to_dmi_lr3e_7
+    config: configs/experiments/pipeline_e2w_vertical_weighted_ce_to_dmi_loss_driven.yaml
+    experiment_id: pipeline_E2w_vertical_weighted_CE_best2652_to_DMI_loss_driven
+    method_hash: e70d6976da069b4be7757e5d5889f8642dd5b98e7b9613a250751efb536b89c5
+    role: reported_ce_to_dmi_comparison
+    execution_status: completed
+    initialization_checkpoint_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+    selected_step: 6084
+    selected_checkpoint_sha256: 7b161bd8ad23d7f7f916e3d59edf777cd54caaef1398ac9dc619c1b1a34bf328
+    exported_final_model_sha256: f6e8430ec20de238ee2d3c69c3e9b769b0f465776b14c4eb765a63d8daf9deba
+    execution_source_commit: 7ce24ad352f0ef27224dee0788a8be39a644caec
+  - key: ce_to_dmi_lr1e_5_control
+    config: configs/experiments/pipeline_e2w_control_vertical_weighted_ce_to_dmi_lr1e-5.yaml
+    experiment_id: pipeline_E2w_control_vertical_weighted_CE_best2652_to_DMI_lr1e-5
+    method_hash: 813f6be070dc62163f8aa31f645ea78d71db675c1124d66a2ec86b1340916188
+    role: matched_no_morphology_control
+    execution_status: partial_at_artifact_audit
+    initialization_checkpoint_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+    latest_observed_step: 3432
+    planned_steps: 6240
+    execution_source_commit: 86104fd84ea98187535fc7a06da8e5fe366ff467
+  - key: ce_to_dmi_lr1e_5_logit_closing
+    config: configs/experiments/pipeline_e3m_vertical_weighted_ce_to_dmi_logit_additive_closing_lr1e-5.yaml
+    experiment_id: pipeline_E3m_vertical_weighted_CE_best2652_to_DMI_logit_additive_closing3_lr1e-5
+    method_hash: e0d7c3d3460f6203fba81c7773144e5827451374d024795a84c60b3aeab1f373
+    role: learnable_morphology
+    execution_status: completed
+    initialization_checkpoint_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+    selected_step: 6084
+    selected_checkpoint_sha256: db0898977310976e04b3cf24325c82f5cd58816c287d95ed7b63330d1dad025b
+    exported_final_model_sha256: 243968af93a3ef6a06962d6207a8711e3455f5d44d4c82113f78b145799b86f8
+    execution_source_commit: 57970be961d6874dbb5bc14dfcd35d1a7fe06355

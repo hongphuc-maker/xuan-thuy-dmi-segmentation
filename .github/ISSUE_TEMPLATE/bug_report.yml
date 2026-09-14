@@ -1,0 +1,43 @@
+name: Bug report
+description: Report a reproducible software or protocol defect
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach restricted data, credentials, checkpoints, or private Drive links.
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem
+      description: Describe the observed and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Include the command and a synthetic or public example when possible.
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Release or commit
+      placeholder: v0.1.0 or full commit SHA
+    validations:
+      required: true
+  - type: input
+    id: method_hash
+    attributes:
+      label: Method hash
+      description: Required for experiment/run failures; otherwise enter N/A.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Python, PyTorch, CUDA, GPU/CPU, operating system.
+    validations:
+      required: true

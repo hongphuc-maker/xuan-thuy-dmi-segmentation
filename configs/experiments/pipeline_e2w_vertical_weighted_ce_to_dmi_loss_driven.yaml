@@ -1,0 +1,44 @@
+schema_version: xtseg-experiment-v1
+experiment_id: pipeline_E2w_vertical_weighted_CE_best2652_to_DMI_loss_driven
+seed: 20260910
+dataset: ../datasets/xuanthuy_may2026_labels_jan2026.yaml
+split: ../splits/pipeline_vertical_band_v1.yaml
+model: ../models/unet_bn64_v1.yaml
+phases:
+  - phase_id: dmi_finetune_from_weighted_ce_best2652
+    loss: ../losses/dmi_exact_v1.yaml
+    initialization:
+      type: checkpoint
+      artifact: E0w_vertical_seed20260910/training/FINAL_MODEL.pt
+      sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+    optimizer:
+      type: sgd
+      learning_rate: 3.0e-7
+      momentum: 0.0
+      weight_decay: 0.0
+    maximum_steps: 6240
+    validation_interval_steps: 156
+    monitor_interval_steps: 10
+selection:
+  checkpoint:
+    metric: fixed_panel_dmi_loss
+    direction: min
+    min_delta: 0.0
+  stopping:
+    rule: maximum_steps
+acceptance:
+  required_predicted_classes: null
+  minimum_recall_by_code: {}
+lineage:
+  pretrained_experiment_id: pipeline_E0w_vertical_weighted_CE
+  pretrained_method_hash: 6e0e849b7cb556dcbf2862790fb7d2336586faf105416536056148fcffcd8e21
+  pretrained_checkpoint_role: FINAL_MODEL_from_best_unrestricted_validation_macro_f1_11
+  pretrained_selected_step: 2652
+  pretrained_checkpoint_sha256: ffce28223708a37848811d753313ab7c97fe332030b5f44fbf78571cf7a12311
+  pretrained_acceptance_pass: false
+reporting:
+  always_record: [validation_macro_f1_11, validation_OA, predicted_classes, per_class_recall]
+  protocol_relation: Paper-inspired CE pretraining then fixed-budget DMI with minimum validation DMI-loss checkpoint selection.
+  adaptation: Learning rate and batch size remain calibrated for dense semantic segmentation rather than copied from image-classification experiments.
+  warning: The CE source checkpoint did not pass the configured 11-class acceptance gate; report this with all downstream results.
+status: runnable_from_locked_checkpoint

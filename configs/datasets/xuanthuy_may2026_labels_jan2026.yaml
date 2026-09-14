@@ -1,0 +1,35 @@
+schema_version: xtseg-dataset-v1
+dataset_id: xuanthuy_s2_2026-05-26_labels_2026-01
+description: Current dataset used by Notebook 4; label reference date has month precision.
+expected_crs: EPSG:32648
+expected_shape: [1374, 1821]
+files:
+  - role: image
+    path: Sentinel2_2026-05-26_HSTDNNXUANTHUY_10bands_10m.tif
+    acquired_at: 2026-05-26
+    sha256: ba549aa47568537ebec8c7ffeaab7a993ec77d6e7f00a9816f8eef884bd2f3ee
+  - role: label
+    path: rasterized_vector_categorized.tif
+    reference_date: 2026-01-01
+    date_precision: month
+    sha256: d02d44ac7d8249ed62ca1e4df6794ac9787accbc57ce73bf1df2c139217048d5
+  - role: verified_points
+    path: verified_points_shapefiles.zip
+    sha256: 3159aac0e6e8001a8c83d684c66c633575cdbcc3d72a9a3b0964473d14780c21
+bands: [B02, B03, B04, B05, B06, B07, B08, B8A, B11, B12]
+class_map:
+  1: Anm
+  2: Bgt
+  3: Dc
+  4: Dnn
+  5: DK
+  6: trống
+  7: Gt
+  8: Rnm
+  9: Stx
+  10: Vbn
+  11: Vcs
+validity:
+  image: all 10 bands finite and unequal to declared nodata
+  label: source code in 1..11
+  ignore_index: 255
