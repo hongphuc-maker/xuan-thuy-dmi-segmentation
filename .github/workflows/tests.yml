@@ -22,7 +22,7 @@ jobs:
       - name: Install package and test dependencies
         run: |
           python -m pip install --index-url https://download.pytorch.org/whl/cpu "torch>=2.4,<3"
-          python -m pip install -e ".[train,evaluate,test]"
+          python -m pip install -e ".[train,evaluate,report,test]"
       - name: Run tests
         run: pytest
       - name: Audit public tree

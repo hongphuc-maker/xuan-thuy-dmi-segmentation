@@ -8,6 +8,7 @@ Before declaring the paper artifact final:
       the independent-point evaluation.
 - [x] Update `paper/experiments.yaml` and `paper/results.yaml` from its completion
       markers; do not extrapolate from the earlier partial trajectory.
+- [x] Run the matched map-fragmentation and paired independent-point comparison.
 - [ ] Confirm article title, author order, affiliations, citation text, and
       copyright holder in `CITATION.cff` and `LICENSE`.
 - [ ] Add the final data-availability statement and a stable data/artifact archive
@@ -19,10 +20,7 @@ Before declaring the paper artifact final:
 - [ ] Create a signed or annotated release tag and archive that exact release in
       a long-term repository such as Zenodo.
 
-The matched no-morphology LR `1e-5` control is now complete, so metric comparisons
-between it and the LR `1e-5` morphology branch are no longer confounded by the
-DMI learning rate. The existing map-smoothness numbers in `paper/results.yaml`
-still compare the morphology branch against the historical LR `3e-7`
-no-morphology branch. Do not reinterpret those topology numbers as the matched
-morphology effect until a direct E3m-versus-control map-comparison artifact is
-generated.
+The E3m-vs-old-E2 comparison remains confounded because both morphology and DMI
+learning rate differ. The completed E3m-vs-matched-E2w comparison isolates the
+configured morphology factor for this seed and scene; it does not establish
+multi-seed generality, accuracy superiority, or non-inferiority.

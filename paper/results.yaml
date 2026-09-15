@@ -1,5 +1,5 @@
-schema_version: xtseg-publication-results-v1
-artifact_audit_date: 2026-09-15
+schema_version: xtseg-publication-results-v2
+artifact_audit_date: 2026-09-16
 rules:
   missing_values: null
   independent_points_must_not_drive_selection: true
@@ -122,3 +122,77 @@ results:
       singleton_components_relative_change: -0.544
       boundary_pixels_relative_change: -0.079
       interpretation: learning_rate_and_morphology_are_confounding_factors
+comparisons:
+  matched_lr1e_5_morphology:
+    status: completed
+    controlled_factor: depthwise_3x3_logit_additive_closing
+    comparison_artifact_sha256:
+      summary_json: ea192ea7f410045eacf588a326d7eb70e43122b18da5b71d64fc0c57c2a763b3
+      map_per_class_csv: f31ab05a4c08a71e1b3f8db1b2a72252fb4bfcae60685d30619e94d75a47673f
+      verified_points_per_class_csv: 63aca09236d37debd6b30969b1a46421d8e49a93300961d87704af1e263b946c
+      comparison_figure: 3e4a8103ee6429865d392ab364b11bd0eb8a2042ccc65f46e7e425e4904d6166
+      changed_pixel_map: 8f8d765abed3c65a04b0917f634f9189353b5bea086ea2bc0e36d4a337ee10c0
+    locked_equal_factors:
+      - sentinel2_2026_scene_and_label_contract
+      - vertical_spatial_split_and_frozen_patch_schedule
+      - weighted_ce_initialization_checkpoint
+      - dmi_loss_and_optimizer
+      - learning_rate_1e_5
+      - maximum_steps_6240
+      - primary_checkpoint_rule_fixed_train_panel_dmi_loss
+      - seed_20260910
+    selected_checkpoint_delta_morphology_minus_control:
+      step: 6084
+      oa: 0.0019546122049385
+      macro_f1_11: -0.00218205570072395
+      macro_iou_11: -0.00124596035061164
+      validation_dmi_loss: 0.192105912402006
+      fixed_train_panel_dmi_loss: -0.00137928729346
+    best_spatial_validation_delta_morphology_minus_control:
+      best_macro_f1_11: -0.0011525120796831
+      best_macro_iou_11: -0.00007139751426045
+      note: maxima occur at different optimizer steps
+    independent_verified_points:
+      evaluated_points: 1036
+      delta_morphology_minus_control:
+        oa: -0.0048262548262548
+        macro_f1_verified_classes: -0.0059111030624265
+        macro_recall_verified_classes: -0.006558710440698
+      paired_outcomes:
+        both_correct: 957
+        control_only_correct: 7
+        morphology_only_correct: 2
+        both_wrong: 70
+      changed_predictions: 11
+      mcnemar_exact_two_sided_p: 0.1796875
+      inference_note: pointwise_test_does_not_establish_equivalence_or_account_for_spatial_dependence
+      verified_class_f1_delta_morphology_minus_control:
+        1_Anm: 0.0033808809284126
+        2_Bgt: -0.0035283344106872
+        4_Dnn: -0.0122102500052922
+        8_Rnm: -0.0024805012146784
+        9_Stx: -0.036045982983698
+        10_Vbn: 0.0
+        11_Vcs: 0.0095064662489582
+    final_map_structure:
+      common_valid_pixels: 1471235
+      changed_pixels: 9988
+      changed_fraction: 0.00678885426189562
+      control:
+        components_8_connected: 2075
+        singleton_components: 551
+        boundary_pixels_4_neighbor: 130376
+      morphology:
+        components_8_connected: 1508
+        singleton_components: 247
+        boundary_pixels_4_neighbor: 124283
+      relative_change_morphology_minus_control:
+        components_8_connected: -0.273253012048193
+        singleton_components: -0.551724137931034
+        boundary_pixels_4_neighbor: -0.046734061483709
+      interpretation_note: map_complexity_is_not_ground_truth_accuracy
+    scope_limitations:
+      - single_seed
+      - single_scene
+      - only_7_of_11_classes_present_in_verified_ground_truth
+      - no_claim_of_accuracy_improvement_or_noninferiority

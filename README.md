@@ -111,13 +111,22 @@ Artifact-audited independent-point results currently available are:
 | Weighted CE to DMI + logit closing, LR `1e-5` | 0.925676 | 0.909508 | complete |
 
 These values cover 1,036 usable points from an input archive of 1,037 points;
-only 7 of the 11 classes are represented in verified ground truth. The matched
-`1e-5` control now enables the intended one-factor-at-a-time comparison against
-the `1e-5` logit-closing branch. On the independent verified points, the control
-is numerically higher than the morphology branch, but these held-out points were
-not used for checkpoint selection or tuning. Morphology claims should therefore
-also consider the spatial-validation trajectory and direct matched map-structure
-evidence rather than treating this final point evaluation as a tuning signal.
+only 7 of the 11 classes are represented in verified ground truth. In the
+one-factor-at-a-time `1e-5` comparison, logit closing reduced final-map connected
+components by 27.3%, singleton components by 55.2%, and boundary pixels by 4.67%,
+while verified-point OA and macro-F1 were 0.00483 and 0.00591 lower than the
+matched control. The exact paired McNemar result was `p=0.1797`; this neither
+demonstrates an accuracy difference at 0.05 nor establishes equivalence. See
+[Matched morphology comparison](docs/MATCHED_COMPARISON.md).
+
+To regenerate the comparison from two completed run directories:
+
+```bash
+xtseg compare-matched-runs \
+  --control-run-root /path/to/E2w_control_DMI_lr1e-5_seed20260910 \
+  --morphology-run-root /path/to/E3m_logit_closing_DMI_lr1e-5_seed20260910 \
+  --output /path/to/matched_comparison
+```
 
 Citation metadata is in [`CITATION.cff`](CITATION.cff). Article title, author
 order, and DOI will be updated when the manuscript metadata is finalized.

@@ -291,6 +291,19 @@ def command_plot_training_history(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_compare_matched_runs(args: argparse.Namespace) -> int:
+    from .comparison import compare_matched_runs
+
+    _print_json(
+        compare_matched_runs(
+            args.control_run_root,
+            args.morphology_run_root,
+            args.output,
+        )
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="xtseg")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -420,6 +433,15 @@ def build_parser() -> argparse.ArgumentParser:
     plot_history.add_argument("--transition-step", type=int)
     plot_history.add_argument("--rolling-steps", type=int, default=100)
     plot_history.set_defaults(func=command_plot_training_history)
+
+    compare = subparsers.add_parser(
+        "compare-matched-runs",
+        help="Compare completed same-LR DMI control and morphology runs",
+    )
+    compare.add_argument("--control-run-root", required=True)
+    compare.add_argument("--morphology-run-root", required=True)
+    compare.add_argument("--output", required=True)
+    compare.set_defaults(func=command_compare_matched_runs)
     return parser
 
 

@@ -70,3 +70,16 @@ def test_plot_training_history_accepts_two_run_roots() -> None:
     assert arguments.ce_run_root == "ce-run"
     assert arguments.dmi_run_root == "dmi-run"
     assert arguments.rolling_steps == 100
+
+
+def test_compare_matched_runs_accepts_control_and_morphology_roots() -> None:
+    arguments = build_parser().parse_args(
+        [
+            "compare-matched-runs",
+            "--control-run-root", "control-run",
+            "--morphology-run-root", "morphology-run",
+            "--output", "comparison",
+        ]
+    )
+    assert arguments.control_run_root == "control-run"
+    assert arguments.morphology_run_root == "morphology-run"

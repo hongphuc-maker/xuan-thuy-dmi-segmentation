@@ -2,6 +2,13 @@
 
 All notable changes to the public research artifact are documented here.
 
+## Unreleased
+
+- Completed the matched no-morphology DMI control provenance and result import.
+- Added a reproducible matched-run comparison for validation histories, paired
+  verified points, and final-map fragmentation.
+- Added the artifact-backed E3m-vs-control interpretation and claim limits.
+
 ## 0.1.0 - 2026-09-15
 
 - Initial public research-code release.
