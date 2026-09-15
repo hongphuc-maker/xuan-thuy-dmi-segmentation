@@ -12,8 +12,8 @@ Only the caller supplies `DATA_ROOT` and `RUN_ROOT`.
 
 ## Required files
 
-The immutable contract is
-[`configs/datasets/xuanthuy_may2026_labels_jan2026.yaml`](../configs/datasets/xuanthuy_may2026_labels_jan2026.yaml).
+The canonical data description is
+[`configs/datasets/xuanthuy_may2026_historical_labels_unknown_date.yaml`](../configs/datasets/xuanthuy_may2026_historical_labels_unknown_date.yaml).
 The current paper protocol expects:
 
 | Role | File | SHA-256 |
@@ -47,14 +47,22 @@ xtseg inspect-inputs \
 Create a new dataset YAML and a new experiment ID for any changed input. Never
 replace a file while retaining its old checksum or reuse a completed run folder.
 
+The four completed publication runs were executed before the label-time metadata
+was corrected. Their experiment YAMLs therefore resolve through a verbatim
+[execution snapshot](../configs/datasets/provenance/xuanthuy_may2026_historical_labels_execution_snapshot_v1.yaml)
+that preserves the original `method_hash` values. The snapshot is provenance,
+not the current factual description. The correction and its computational scope
+are recorded in [`paper/metadata_corrections.yaml`](../paper/metadata_corrections.yaml).
+
 ## Label-time interpretation
 
-The label raster is treated as a historical land-cover reference whose true
-observation/compilation time is not established with sufficient precision for a
-pixel-level change model. The `reference_date` in the immutable data contract is
-catalog metadata used by the runs; it is not evidence that every label pixel was
-observed on that date. Consequently, temporal mismatch is a plausible source of
-label noise, not a measured noise transition process.
+The label raster is a historical land-cover reference. Its observation and
+compilation time is unknown; the project does not assign it a reference date or
+date precision. A previous execution contract recorded January 2026 without
+sufficient evidence, and that metadata has been withdrawn. The raster bytes and
+checksum did not change. Temporal mismatch is therefore a plausible source of
+label noise, not an observed date difference or a measured noise transition
+process.
 
 ## Independent evaluation
 

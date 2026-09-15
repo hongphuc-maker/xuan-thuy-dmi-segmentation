@@ -1,7 +1,9 @@
 schema_version: xtseg-experiment-v1
 experiment_id: pipeline_E2w_vertical_weighted_CE_best2652_to_DMI_loss_driven
 seed: 20260910
-dataset: ../datasets/xuanthuy_may2026_labels_jan2026.yaml
+# Completed-run provenance: this snapshot preserves the executed method hash.
+# Use the canonical unknown-date dataset contract for any new experiment.
+dataset: ../datasets/provenance/xuanthuy_may2026_historical_labels_execution_snapshot_v1.yaml
 split: ../splits/pipeline_vertical_band_v1.yaml
 model: ../models/unet_bn64_v1.yaml
 phases:

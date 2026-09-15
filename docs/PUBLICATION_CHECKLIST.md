@@ -3,6 +3,8 @@
 The source package and four completed branches have artifact-backed provenance.
 Before declaring the paper artifact final:
 
+- [x] Correct the unsupported label date, publish the canonical unknown-date
+      contract, and retain the executed metadata only as a provenance snapshot.
 - [x] Finish the matched no-morphology `1e-5` control to 6,240 steps.
 - [x] Generate its sealed map and, with the unchanged authorized protocol, run
       the independent-point evaluation.

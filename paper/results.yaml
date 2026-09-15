@@ -133,7 +133,7 @@ comparisons:
       comparison_figure: 3e4a8103ee6429865d392ab364b11bd0eb8a2042ccc65f46e7e425e4904d6166
       changed_pixel_map: 8f8d765abed3c65a04b0917f634f9189353b5bea086ea2bc0e36d4a337ee10c0
     locked_equal_factors:
-      - sentinel2_2026_scene_and_label_contract
+      - sentinel2_scene_2026_and_historical_label_contract
       - vertical_spatial_split_and_frozen_patch_schedule
       - weighted_ce_initialization_checkpoint
       - dmi_loss_and_optimizer

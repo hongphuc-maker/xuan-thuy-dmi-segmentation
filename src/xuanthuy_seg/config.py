@@ -18,6 +18,8 @@ ALLOWED_LOSSES = {"ce_unweighted", "ce_weighted", "dmi_exact", "dmi_regularized"
 ALLOWED_OPTIMIZERS = {"sgd", "adam", "adamw"}
 ALLOWED_DIRECTIONS = {"min", "max"}
 ALLOWED_STOP_RULES = {"patience", "maximum_steps"}
+ALLOWED_DATASET_SCHEMAS = {"xtseg-dataset-v1", "xtseg-dataset-v2"}
+ALLOWED_OBSERVATION_TIME_STATUSES = {"known", "unknown"}
 
 
 @dataclass(frozen=True)
@@ -81,6 +83,9 @@ def _validate_date(value: Any, context: str) -> None:
 
 def validate_dataset(config: dict[str, Any]) -> None:
     _require(config, {"schema_version", "dataset_id", "files", "bands", "class_map"}, "dataset")
+    schema_version = str(config["schema_version"])
+    if schema_version not in ALLOWED_DATASET_SCHEMAS:
+        raise ValueError(f"Unsupported dataset schema_version: {schema_version}")
     if len(config["bands"]) != 10:
         raise ValueError("The current model contract requires exactly 10 Sentinel-2 bands")
     class_map = {int(key): str(value) for key, value in config["class_map"].items()}
@@ -101,8 +106,32 @@ def validate_dataset(config: dict[str, Any]) -> None:
             _validate_date(spec["acquired_at"], f"{role}.acquired_at")
         if "reference_date" in spec:
             _validate_date(spec["reference_date"], f"{role}.reference_date")
+        if "date_precision" in spec and "reference_date" not in spec:
+            raise ValueError(f"{role}.date_precision requires {role}.reference_date")
     if not {"image", "label"}.issubset(roles):
         raise ValueError("dataset files must define at least image and label roles")
+
+    if schema_version == "xtseg-dataset-v2":
+        label_spec = next(
+            spec for spec in config["files"] if str(spec["role"]) == "label"
+        )
+        _require(label_spec, {"observation_time_status"}, "dataset v2 label")
+        time_status = str(label_spec["observation_time_status"])
+        if time_status not in ALLOWED_OBSERVATION_TIME_STATUSES:
+            raise ValueError(
+                "label.observation_time_status must be known or unknown"
+            )
+        if time_status == "unknown" and (
+            "reference_date" in label_spec or "date_precision" in label_spec
+        ):
+            raise ValueError(
+                "An unknown label observation time cannot declare reference_date "
+                "or date_precision"
+            )
+        if time_status == "known" and "reference_date" not in label_spec:
+            raise ValueError(
+                "A known label observation time requires reference_date"
+            )
 
 
 def validate_split(config: dict[str, Any]) -> None:

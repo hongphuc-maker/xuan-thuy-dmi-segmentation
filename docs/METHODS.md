@@ -73,7 +73,8 @@ The following are project-specific and are **not** claims from the DMI paper:
 - rare-class batch scheduling and 16x224x224 dense batches;
 - mild class-weighted CE pretraining;
 - learning rates, step budgets, monitoring panels, and checkpoint rules;
-- the assumption that an uncertain historical label time may induce noise; and
+- the assumption that an unknown historical label time may induce temporally
+  mismatched supervision; and
 - learnable logit morphology.
 
 The implementation therefore tests an adaptation of DMI; it does not constitute

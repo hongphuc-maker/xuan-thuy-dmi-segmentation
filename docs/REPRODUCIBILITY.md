@@ -13,6 +13,12 @@ All rows use the same 2026 image contract, vertical split, frozen patch/batch
 artifacts, batch size 16, and validation every 156 optimizer steps. The final two
 rows are the one-factor-at-a-time comparison for morphology.
 
+These four YAMLs are completed-run protocols and retain a clearly marked dataset
+execution snapshot so their recorded `method_hash` values remain reproducible.
+The snapshot contains withdrawn label-time metadata and must not be interpreted
+as the current dataset description. New experiments must instead reference the
+[canonical unknown-date dataset contract](../configs/datasets/xuanthuy_may2026_historical_labels_unknown_date.yaml).
+
 ## 1. Create the environment
 
 ```bash
@@ -58,6 +64,12 @@ xtseg run-pipeline \
 
 If a runtime disconnects, rerun the identical command. Resume is refused if the
 Git commit, method hash, or run lock differs.
+
+The commands above reproduce the completed-run protocol. To start a new run
+rather than verify an existing artifact, copy the experiment YAML, assign a new
+experiment ID and run root, and replace its dataset path with the canonical
+unknown-date contract. Do not resume a completed pre-correction run with that new
+config because its metadata-corrected method hash is intentionally different.
 
 For a DMI continuation, provide the exact Weighted-CE model selected at step
 2,652. The YAML locks its SHA-256 to

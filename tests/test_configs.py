@@ -1,10 +1,15 @@
+import copy
 from pathlib import Path
 
-from xuanthuy_seg.config import load_experiment_bundle
+import pytest
+import yaml
+
+from xuanthuy_seg.config import load_experiment_bundle, validate_dataset
 
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPERIMENTS = ROOT / "configs" / "experiments"
+DATASETS = ROOT / "configs" / "datasets"
 
 
 def test_all_public_experiment_configs_resolve() -> None:
@@ -19,9 +24,6 @@ def test_all_public_experiment_configs_resolve() -> None:
         bundle = load_experiment_bundle(path)
         assert len(bundle.method_hash) == 64
         assert bundle.resolved["method_hash"] == bundle.method_hash
-        assert bundle.dataset["dataset_id"] == (
-            "xuanthuy_s2_2026-05-26_labels_2026-01"
-        )
         assert bundle.model["parameters"]["in_channels"] == 10
         assert bundle.model["parameters"]["num_classes"] == 11
         assert bundle.model["parameters"]["base_channels"] == 64
@@ -119,3 +121,29 @@ def test_spatial_protocol_prevents_shared_input_pixels() -> None:
     assert split["sampling"]["n_patches"] == 4992
     assert split["sampling"]["batch_size"] == 16
     assert split["audit"]["require_zero_shared_input_pixels"] is True
+
+
+def test_canonical_dataset_records_unknown_historical_label_time() -> None:
+    dataset = yaml.safe_load(
+        (
+            DATASETS / "xuanthuy_may2026_historical_labels_unknown_date.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    validate_dataset(dataset)
+
+    assert dataset["schema_version"] == "xtseg-dataset-v2"
+    assert dataset["dataset_id"] == (
+        "xuanthuy_s2_2026-05-26_historical_labels_unknown_date"
+    )
+    label = next(item for item in dataset["files"] if item["role"] == "label")
+    assert label["observation_time_status"] == "unknown"
+    assert "reference_date" not in label
+    assert "date_precision" not in label
+
+    invalid = copy.deepcopy(dataset)
+    invalid_label = next(
+        item for item in invalid["files"] if item["role"] == "label"
+    )
+    invalid_label["reference_date"] = "2026-01-01"
+    with pytest.raises(ValueError, match="unknown label observation time"):
+        validate_dataset(invalid)
