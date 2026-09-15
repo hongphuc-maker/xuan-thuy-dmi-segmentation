@@ -1,6 +1,6 @@
-schema_version: xtseg-dataset-v1
-dataset_id: xuanthuy_s2_2026-05-26_labels_2026-01
-description: Current dataset used by Notebook 4; label reference date has month precision.
+schema_version: xtseg-dataset-v2
+dataset_id: xuanthuy_s2_2026-05-26_historical_labels_unknown_date
+description: Sentinel-2 scene acquired on 2026-05-26 with historical labels whose observation and compilation time is unknown.
 expected_crs: EPSG:32648
 expected_shape: [1374, 1821]
 files:
@@ -10,8 +10,7 @@ files:
     sha256: ba549aa47568537ebec8c7ffeaab7a993ec77d6e7f00a9816f8eef884bd2f3ee
   - role: label
     path: rasterized_vector_categorized.tif
-    reference_date: 2026-01-01
-    date_precision: month
+    observation_time_status: unknown
     sha256: d02d44ac7d8249ed62ca1e4df6794ac9787accbc57ce73bf1df2c139217048d5
   - role: verified_points
     path: verified_points_shapefiles.zip

@@ -26,6 +26,9 @@ This public repository contains source code, tests, immutable YAML protocols,
 and a Colab launcher. It intentionally does **not** contain Sentinel-2 rasters,
 label rasters, verified points, trained weights, GeoTIFF predictions, or private
 Drive paths. See [Data access](docs/DATA.md) for the expected files and checksums.
+The label raster is a historical reference whose observation and compilation
+time is unknown. A metadata correction preserves the original execution hashes
+without presenting the previously recorded January 2026 date as factual.
 
 ```text
 configs/       immutable data, split, model, loss, and experiment contracts

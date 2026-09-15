@@ -2,8 +2,9 @@
 
 ## Controlled design
 
-The no-morphology control and logit-closing branch use the same Sentinel-2 2026
-scene, label raster, vertical spatial split, frozen patch and batch artifacts,
+The no-morphology control and logit-closing branch use the same Sentinel-2 scene
+acquired in 2026, the same historical label raster of unknown observation time,
+the same vertical spatial split, frozen patch and batch artifacts,
 Weighted-CE checkpoint, DMI loss, SGD settings, learning rate `1e-5`, 6,240-step
 budget, validation cadence, seed, and primary checkpoint rule. The configured
 depthwise 3x3 logit additive closing layer is the intended changed factor.

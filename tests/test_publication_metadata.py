@@ -29,6 +29,15 @@ def test_publication_manifest_matches_resolved_configs() -> None:
         (ROOT / "paper" / "results.yaml").read_text(encoding="utf-8")
     )["results"]
 
+    assert manifest["dataset_contract"] == (
+        "configs/datasets/xuanthuy_may2026_historical_labels_unknown_date.yaml"
+    )
+    assert manifest["execution_dataset_contract_snapshot"] == (
+        "configs/datasets/provenance/"
+        "xuanthuy_may2026_historical_labels_execution_snapshot_v1.yaml"
+    )
+    assert manifest["metadata_corrections"] == "paper/metadata_corrections.yaml"
+
     keys = []
     for experiment in manifest["experiments"]:
         keys.append(experiment["key"])
@@ -64,10 +73,43 @@ def test_dataset_contract_uses_relative_paths_and_checksums() -> None:
             ROOT
             / "configs"
             / "datasets"
-            / "xuanthuy_may2026_labels_jan2026.yaml"
+            / "xuanthuy_may2026_historical_labels_unknown_date.yaml"
         ).read_text(encoding="utf-8")
     )
     for item in dataset["files"]:
         path = Path(item["path"])
         assert not path.is_absolute()
         assert len(item["sha256"]) == 64
+
+
+def test_label_time_correction_preserves_computational_inputs() -> None:
+    datasets = ROOT / "configs" / "datasets"
+    canonical = yaml.safe_load(
+        (datasets / "xuanthuy_may2026_historical_labels_unknown_date.yaml")
+        .read_text(encoding="utf-8")
+    )
+    snapshot = yaml.safe_load(
+        (
+            datasets
+            / "provenance"
+            / "xuanthuy_may2026_historical_labels_execution_snapshot_v1.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    correction = yaml.safe_load(
+        (ROOT / "paper" / "metadata_corrections.yaml").read_text(encoding="utf-8")
+    )["corrections"][0]
+
+    canonical_files = {
+        item["role"]: (item["path"], item["sha256"])
+        for item in canonical["files"]
+    }
+    snapshot_files = {
+        item["role"]: (item["path"], item["sha256"])
+        for item in snapshot["files"]
+    }
+    assert canonical_files == snapshot_files
+    assert canonical["bands"] == snapshot["bands"]
+    assert canonical["class_map"] == snapshot["class_map"]
+    assert canonical["validity"] == snapshot["validity"]
+    assert correction["status"] == "applied"
+    assert not any(correction["computational_impact"].values())

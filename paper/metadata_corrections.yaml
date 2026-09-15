@@ -1,0 +1,26 @@
+schema_version: xtseg-publication-metadata-corrections-v1
+corrections:
+  - correction_id: label_observation_time_unknown
+    status: applied
+    incorrect_metadata:
+      dataset_id: xuanthuy_s2_2026-05-26_labels_2026-01
+      reference_date: 2026-01-01
+      date_precision: month
+    corrected_interpretation: The label raster is a historical land-cover reference whose observation and compilation time is unknown.
+    canonical_dataset_contract: configs/datasets/xuanthuy_may2026_historical_labels_unknown_date.yaml
+    execution_dataset_contract_snapshot: configs/datasets/provenance/xuanthuy_may2026_historical_labels_execution_snapshot_v1.yaml
+    affected_experiments:
+      - weighted_ce
+      - ce_to_dmi_lr3e_7
+      - ce_to_dmi_lr1e_5_control
+      - ce_to_dmi_lr1e_5_logit_closing
+    computational_impact:
+      image_checksum_changed: false
+      label_checksum_changed: false
+      verified_points_checksum_changed: false
+      spatial_split_changed: false
+      patch_or_batch_schedule_changed: false
+      model_or_loss_changed: false
+      trained_artifacts_changed: false
+      reported_results_changed: false
+    provenance_note: The execution snapshot preserves the parsed dataset mapping used to calculate the completed-run method hashes. It is not the current factual dataset description.
