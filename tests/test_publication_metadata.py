@@ -51,6 +51,11 @@ def test_publication_manifest_matches_resolved_configs() -> None:
     assert control_results["independent_verified_points"] is not None
     assert control_results["independent_verified_points"]["evaluated_points"] == 1036
     assert len(control_results["independent_verified_points"]["map_sha256"]) == 64
+    comparison = yaml.safe_load(
+        (ROOT / "paper" / "results.yaml").read_text(encoding="utf-8")
+    )["comparisons"]["matched_lr1e_5_morphology"]
+    assert comparison["status"] == "completed"
+    assert comparison["final_map_structure"]["changed_pixels"] == 9988
 
 
 def test_dataset_contract_uses_relative_paths_and_checksums() -> None:

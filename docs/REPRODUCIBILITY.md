@@ -44,7 +44,7 @@ xtseg run-pipeline \
 ```
 
 Prepared split, normalization, manifest, schedule, and validation-window files
-are stored below `RUN_ROOT/prepared/` with their verification metadata.
+are stored below `RUN_ROOT/data_artifacts/` with their verification metadata.
 
 ## 3. Train or resume
 
@@ -123,3 +123,21 @@ A reportable result must retain:
 Use [`paper/experiments.yaml`](../paper/experiments.yaml) and
 [`paper/results.yaml`](../paper/results.yaml) as the machine-readable publication
 index rather than relying on notebook output.
+
+## 7. Reproduce the matched morphology comparison
+
+After both `1e-5` run roots contain training, map, and independent-evaluation
+completion markers, run:
+
+```bash
+xtseg compare-matched-runs \
+  --control-run-root /path/to/E2w_control_DMI_lr1e-5_seed20260910 \
+  --morphology-run-root /path/to/E3m_logit_closing_DMI_lr1e-5_seed20260910 \
+  --output /path/to/matched_comparison
+```
+
+The command verifies both map checksums and common raster grid, pairs verified
+points by source identity, and writes a JSON summary, per-class CSV tables, a
+binary changed-pixel GeoTIFF, a comparison figure, and a completion marker with
+artifact checksums. Component counts use 8-connectivity; a boundary pixel has at
+least one valid 4-neighbour with a different class code.

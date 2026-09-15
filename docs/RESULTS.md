@@ -22,3 +22,9 @@ validation loss or test loss.
 The manifest deliberately uses `null` when an artifact-backed value has not yet
 been imported. A missing value is preferable to a number reconstructed from a
 plot or memory.
+
+The matched `1e-5` comparison is generated with `xtseg compare-matched-runs`.
+Its McNemar calculation is paired by verified-point identity and tests only the
+discordant correct/incorrect outcomes. A non-significant result is not evidence
+that the methods are equivalent. Connected-component, singleton, and boundary
+counts describe map structure; they are not ground-truth accuracy metrics.
